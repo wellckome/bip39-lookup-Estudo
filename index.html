@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pesquisa das 2048 palavras BIP39 - Funciona offline">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>BIP39 Lookup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="bg-glow bg-glow-1"></div>
+        <div class="bg-glow bg-glow-2"></div>
+        <div class="bg-noise"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <header class="header">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/>
+                        <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>
+                    </svg>
+                </div>
+                <h1 class="title">BIP39 Lookup</h1>
+                <p class="subtitle">Pesquise as 2048 palavras do padrão BIP39 por número ou palavra</p>
+            </header>
+
+            <!-- Search Card -->
+            <div class="search-card">
+                <!-- Search Input -->
+                <div class="search-wrapper">
+                    <div class="search-glow"></div>
+                    <div class="search-input-container">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.3-4.3"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Digite um número (1-2048) ou uma palavra..."
+                            autocomplete="off"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                        >
+                        <div class="keyboard-hint">
+                            Pressione <kbd>Enter</kbd>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autocomplete Dropdown -->
+                <div id="autocomplete" class="autocomplete hidden">
+                    <div class="autocomplete-header">
+                        <span id="suggestionCount">0 sugestões</span> • Use ↑↓ para navegar, Tab ou Enter para selecionar
+                    </div>
+                    <ul id="suggestionList" class="suggestion-list"></ul>
+                </div>
+
+                <!-- Result Display -->
+                <div id="resultContainer" class="result-container">
+                    <div class="result-placeholder">
+                        <p class="placeholder-text">O resultado aparecerá aqui</p>
+                        <p class="placeholder-hint">Digite um número de 1 a 2048 ou uma palavra BIP39</p>
+                    </div>
+                </div>
+
+                <!-- Info Footer -->
+                <div class="info-footer">
+                    <div class="info-item">
+                        <div class="info-icon info-icon-cyan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                            </svg>
+                        </div>
+                        <span>Offline</span>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon info-icon-purple">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <span>Sem Cache</span>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon info-icon-pink">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/>
+                                <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>
+                            </svg>
+                        </div>
+                        <span>2048 Palavras</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Text -->
+            <p class="footer-text">Padrão BIP39 • Nenhum dado é armazenado</p>
+        </div>
+    </main>
+
+    <script src="words.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
