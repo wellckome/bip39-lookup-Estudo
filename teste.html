@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>BIP39 Lookup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 10px;
+      width: 250px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg,#22d3ee,#a855f7,#ec4899);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { opacity: 0.9; }
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .box {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .box-number {
+      background: #22d3ee;
+      box-shadow: 0 0 10px #22d3ee;
+    }
+    .box-word {
+      background: #a855f7;
+      box-shadow: 0 0 10px #a855f7;
+    }
+    .error { color: #ff4d4d; }
+  </style>
+</head>
+<body>
+  <h1>BIP39 Lookup</h1>
+  <input type="text" id="entrada" placeholder="Digite número ou palavra...">
+  <button onclick="pesquisar()">Pesquisar</button>
+  <div id="resultado">O resultado aparecerá aqui</div>
+
+  <script>
+    async function pesquisar() {
+      const entrada = document.getElementById("entrada");
+      const valor = entrada.value.trim();
+      const resultadoDiv = document.getElementById("resultado");
+
+      if (!valor) {
+        resultadoDiv.innerHTML = "<span class='error'>Digite algo.</span>";
+        entrada.focus();
+        return;
+      }
+
+      try {
+        const url = "https://script.google.com/macros/s/AKfycbyW4PK8LB4mfiDHjPuhliuWH6fIhzDT9OP2DOv3xqy2unJuQmhJNEyWBSGnRSxrOBQtRw/exec?q=" 
+                    + encodeURIComponent(valor);
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.error) {
+          resultadoDiv.innerHTML = `<span class='error'>${data.error}</span>`;
+        } else {
+          resultadoDiv.innerHTML = `
+            <div class="box box-number">Número: ${data.number}</div>
+            <div class="box box-word">Palavra: ${data.word}</div>
+          `;
+        }
+      } catch (err) {
+        resultadoDiv.innerHTML = "<span class='error'>Erro ao consultar Web App.</span>";
+      }
+
+      entrada.value = "";
+      entrada.focus();
+    }
+
+    document.getElementById("entrada").addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        pesquisar();
+      }
+    });
+  </script>
+</body>
+</html>
